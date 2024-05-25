@@ -57,13 +57,13 @@ def transcribe_one(model, audio_path):
 def make_prompt(name, audio_prompt_path, transcript=None):
     global model, text_collater, text_tokenizer, codec
     wav_pr, sr = torchaudio.load(audio_prompt_path)
+    # print("audio_prompt_path 是: "+audio_prompt_path)
     # check length
     if wav_pr.size(-1) / sr > 15:
         raise ValueError(f"Prompt too long, expect length below 15 seconds, got {wav_pr / sr} seconds.")
     if wav_pr.size(0) == 2:
         wav_pr = wav_pr.mean(0, keepdim=True)
     text_pr, lang_pr = make_transcript(name, wav_pr, sr, transcript)
-
     # tokenize audio
     encoded_frames = tokenize_audio(codec, (wav_pr, sr))
     audio_tokens = encoded_frames[0][0].transpose(2, 1).cpu().numpy()
