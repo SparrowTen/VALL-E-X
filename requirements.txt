@@ -21,3 +21,6 @@ nltk
 sudachipy
 sudachidict_core
 vocos
+unidic-lite
+mecab-python3
+opencc-python-reimplemented

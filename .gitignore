@@ -1,3 +1,4 @@
 *.pt
 *.exe
+/result
 /venv
